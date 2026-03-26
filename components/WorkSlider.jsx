@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
-import { Pagination } from "swiper";
+import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -13,48 +13,24 @@ const workSlides = {
     {
       images: [
         {
-          title: "title",
+          title: "Kroolo AI",
           path: "/thumb1.jpg",
-          link: "http://example.com",
+          link: "https://kroolo-ai.vercel.app/",
         },
         {
-          title: "title",
+          title: "VCAD",
           path: "/thumb2.jpg",
-          link: "http://example.com",
+          link: "https://vcad.vercel.app/",
         },
         {
-          title: "title",
+          title: "Eid Mubarak",
           path: "/thumb3.jpg",
-          link: "http://example.com",
+          link: "https://eid-mubarak-fun.netlify.app/",
         },
         {
-          title: "title",
+          title: "ZSOS",
           path: "/thumb4.jpg",
-          link: "http://example.com",
-        },
-      ],
-    },
-    {
-      images: [
-        {
-          title: "title",
-          path: "/thumb4.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb1.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb2.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb3.jpg",
-          link: "http://example.com",
+          link: "https://zsos.vercel.app/",
         },
       ],
     },

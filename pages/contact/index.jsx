@@ -3,30 +3,41 @@ import { BsArrowRight } from "react-icons/bs";
 
 import { fadeIn } from "../../variants";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [modal, setModal] = useState({ show: false, type: "", message: "" });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
 
-    const myForm = event.target;
-    const formData = new FormData(myForm);
+    const formData = new FormData(event.target);
+    const templateParams = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
 
-    fetch("/__forms.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          alert("Thank you. I will get back to you ASAP.");
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => console.log(error))
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_SERVICE_ID,
+        process.env.NEXT_PUBLIC_CONTACT_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_PUBLIC_KEY,
+      )
+      .then(
+        (result) => {
+          setModal({ show: true, type: "success", message: "Thank you. I will get back to you ASAP." });
+          event.target.reset();
+        },
+        (error) => {
+          console.log("EmailJS error:", error);
+          setModal({ show: true, type: "error", message: `Failed to send message: ${error.text || "Unknown error"}. Please try again.` });
+        },
+      )
       .finally(() => setIsLoading(false));
   };
 
@@ -60,8 +71,6 @@ const Contact = () => {
           >
             {/* input group */}
             <div className="flex gap-x-6 w-full">
-              <input type="hidden" name="form-name" value="contact" />
-
               <input
                 type="text"
                 name="name"
@@ -120,6 +129,45 @@ const Contact = () => {
           </motion.form>
         </div>
       </div>
+
+      {/* Modal */}
+      {modal.show && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={() => setModal({ show: false, type: "", message: "" })}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className={`bg-white p-8 rounded-lg shadow-xl max-w-md mx-4 text-center ${
+              modal.type === "success" ? "border-l-4 border-green-500" : "border-l-4 border-red-500"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={`text-4xl mb-4 ${modal.type === "success" ? "text-green-500" : "text-red-500"}`}>
+              {modal.type === "success" ? "✓" : "✕"}
+            </div>
+            <h3 className="text-xl font-semibold mb-2">
+              {modal.type === "success" ? "Message Sent!" : "Error"}
+            </h3>
+            <p className="text-gray-600 mb-6">{modal.message}</p>
+            <button
+              onClick={() => setModal({ show: false, type: "", message: "" })}
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                modal.type === "success"
+                  ? "bg-green-500 hover:bg-green-600 text-white"
+                  : "bg-red-500 hover:bg-red-600 text-white"
+              }`}
+            >
+              {modal.type === "success" ? "Great!" : "Try Again"}
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 };

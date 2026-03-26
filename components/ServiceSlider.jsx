@@ -6,7 +6,7 @@ import {
   RxRocket,
   RxArrowTopRight,
 } from "react-icons/rx";
-import { FreeMode, Pagination } from "swiper";
+import { FreeMode, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -15,29 +15,33 @@ import "swiper/css/pagination";
 
 const serviceData = [
   {
-    Icon: RxCrop,
-    title: "Branding",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    Icon: RxPencil2,
-    title: "Design",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
     Icon: RxDesktop,
-    title: "Development",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    Icon: RxReader,
-    title: "Copywriting",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    title: "Frontend Development",
+    description:
+      "Building responsive and interactive user interfaces using React, Next.js, and Tailwind CSS.",
   },
   {
     Icon: RxRocket,
-    title: "SEO",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    title: "Backend Development",
+    description:
+      "Developing robust server-side applications with Node.js, Express, and MongoDB.",
+  },
+  {
+    Icon: RxCrop,
+    title: "Full-Stack Development",
+    description:
+      "End-to-end web application development from concept to deployment.",
+  },
+  {
+    Icon: RxPencil2,
+    title: "UI/UX Design",
+    description:
+      "Creating user-friendly designs with modern tools and best practices.",
+  },
+  {
+    Icon: RxReader,
+    title: "API Development",
+    description: "Building RESTful APIs and integrating third-party services.",
   },
 ];
 

@@ -11,11 +11,12 @@ const Header = () => {
           {/* logo */}
           <Link href="/">
             <Image
-              src="/logo.svg"
+              src="/logo2.png"
               alt="logo"
-              width={220}
+              width={120}
               height={48}
               priority
+              className=" h-[60px] object-cover w-[270px]"
             />
           </Link>
 
