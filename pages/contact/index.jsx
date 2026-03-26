@@ -30,19 +30,27 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          setModal({ show: true, type: "success", message: "Thank you. I will get back to you ASAP." });
+          setModal({
+            show: true,
+            type: "success",
+            message: "Thank you. I will get back to you ASAP.",
+          });
           event.target.reset();
         },
         (error) => {
           console.log("EmailJS error:", error);
-          setModal({ show: true, type: "error", message: `Failed to send message: ${error.text || "Unknown error"}. Please try again.` });
+          setModal({
+            show: true,
+            type: "error",
+            message: `Failed to send message: ${error.text || "Unknown error"}. Please try again.`,
+          });
         },
       )
       .finally(() => setIsLoading(false));
   };
 
   return (
-    <div className="h-full bg-primary/30">
+    <div className="h-full bg-primary/30 pt-16 lg:pt-0">
       <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
         {/* text & form */}
         <div className="flex flex-col w-full max-w-[700px]">
@@ -52,7 +60,7 @@ const Contact = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 text-center mb-12"
+            className="h2 text-center mt-5 lg:mt-0 mb-5 lg:mb-12"
           >
             Let's <span className="text-accent">connect.</span>
           </motion.h2>
@@ -144,11 +152,15 @@ const Contact = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             className={`bg-white p-8 rounded-lg shadow-xl max-w-md mx-4 text-center ${
-              modal.type === "success" ? "border-l-4 border-green-500" : "border-l-4 border-red-500"
+              modal.type === "success"
+                ? "border-l-4 border-green-500"
+                : "border-l-4 border-red-500"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={`text-4xl mb-4 ${modal.type === "success" ? "text-green-500" : "text-red-500"}`}>
+            <div
+              className={`text-4xl mb-4 ${modal.type === "success" ? "text-green-500" : "text-red-500"}`}
+            >
               {modal.type === "success" ? "✓" : "✕"}
             </div>
             <h3 className="text-xl font-semibold mb-2">

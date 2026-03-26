@@ -8,10 +8,10 @@ import { fadeIn } from "../variants";
 
 const Home = () => {
   return (
-    <div className="bg-primary/60 h-full">
+    <div className="bg-primary/60 h-full ">
       {/* text */}
-      <div className="w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10">
-        <div className="text-left flex flex-col justify-start pt-20 xl:pt-40 h-full container mx-auto z-50">
+      <div className="w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10 pt-20 lg:pt-0 ">
+        <div className=" text-left flex flex-col justify-start pt-20 xl:pt-40 h-full container mx-auto z-50">
           {/* title */}
           <motion.h2
             variants={fadeIn("down", 0.2)}
@@ -35,6 +35,10 @@ const Home = () => {
           >
             Turning ideas into motion with code, GSAP & Framer
           </motion.p>
+          {/* btn */}
+        <div className="absolute bottom-0 left-40 transform -translate-x-1/2 z-10 block lg:hidden">
+          <ProjectsBtn />
+        </div>
         </div>
       </div>
       {/* image */}
